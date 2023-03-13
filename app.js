@@ -7,7 +7,7 @@ const port = process.env.PORT || 8080;
 const db = require('./db/db_pool');
 
 //Configure Express to use certain HTTP headers for security
-//Explicitly set the CSP to allow certain sources
+//Explicitly set the CSP to allow specific sources
 app.use(helmet({
     contentSecurityPolicy: {
       directives: {
