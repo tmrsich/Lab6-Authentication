@@ -1,0 +1,31 @@
+#other-buttons {
+    display: flex;
+    margin: auto;
+    justify-content: space-evenly;
+    width: 85%;
+}
+
+.modal {
+    margin-top: 2.5%;
+    width: 90%;
+    background-color: var(--modal-color);
+    border-radius: 20px;
+}
+
+.footer-modal   {
+    background-color: var(--modal-color);
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+.save-exit-modal {
+    width: 15%;
+    text-align: center;
+    left: 3%;
+}
+
+.exit-modal {
+    width: 10%;
+    text-align: center;
+    left: 72%;
+}

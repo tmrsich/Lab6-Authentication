@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/styles/allstyles.css">
+    <link rel="stylesheet" href="/styles/inventorystyles/inventoryform-styles.css">
+    <link rel="stylesheet" href="/styles/inventorystyles/inventorytable-styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+</head>
+
+    <!--A fixed navigation bar with icons and links-->
+    <nav class="z-depth-5" name="navigation-bar">
+        <h1 class="nav-links" id="homepage"><a class="nav-href" id="homepage-link" href="/">Home</a>
+            <img class="nav-icons" id="homepage-icon" src="/images/welcomeIcon.png">
+        </h1>
+        <h1 class="nav-links" id="inventory"><a class="nav-href" id="inventory-link" href="/inventory">Inventory</a>
+            <img class="nav-icons" id="inventory-icon" src="/images/inventoryIcon.png">
+        </h1>
+        <h1 class="nav-links" id="details"><a class="nav-href" id="details-link" href="/inventory/details">Details</a>
+            <img class="nav-icons" id="details-icon" src="/images/detailsIcon.png">
+        </h1>
+    </nav>
+
+    <!--Inventory form to add a new item-->
+    <div id="inventory-form">
+        <form method="post" action="/inventory" class="z-depth-1">
+            <div class="row">
+                    <input id="class-name" name="class_name" type="text" placeholder="Class">
+                    <input id="assignment-name" name="assignment_name" type="text" placeholder="Assignment">
+                    <input id="due-date" name="due_date" type="text" placeholder="Date (MM-DD-YYYY)">
+                    <input id="priority-rating" name="priority_rating" type="text" type="text" placeholder="Priority Rating">
+            </div>
+            <input class="btn waves-effect z-depth-2" id="submit-button" type="Submit" style="margin-top: 100px">
+        </form>
+    </div>
+
+    <!--Full inventory table with nonfunctional info/edit and delete buttons-->
+    <div id="full-inventory-table">
+        <div class="table z-depth-5" id="inventory-table">
+            <table class="highlight responsive-table">
+                <thead>
+                    <tr>
+                        <th id="class-name">Class:</th>
+                        <th id="assignment-name">Assignment Name:</th>
+                        <th id="due-date">Due Date:</th>
+                        <th id="priority">Priority (1-10):</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% for (let i = 0; i < inventory.length; i++) { %>
+                        <tr>
+                            <a href="/inventory/details/<%=inventory[i].item_id%>" >
+                            <td>
+                                <a href="/inventory/details/<%=inventory[i].item_id%>" class="btn waves-effect waves-light blue darken-3 z-depth-2 infoedit-button">Info/Edit</a>
+                                <a href="/inventory/details/<%=inventory[i].item_id%>/delete" class="btn waves-effect waves-light blue darken-3 z-depth-2 delete-button">Delete</a>
+                                <%=inventory[i].class_name%>
+                            </td>
+                            <td><%=inventory[i].assignment_name%></td>
+                            <td><%=inventory[i].due_date%></td>
+                            <td><%=inventory[i].priority_rating%></td>
+                        </a>
+                    </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</html>

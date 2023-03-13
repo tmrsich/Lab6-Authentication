@@ -1,0 +1,40 @@
+* {
+    color: var(--table-white-color);
+}
+
+#inventory-form {
+    border: 2.5px solid var(--table-white-color);
+    position: relative;
+    width: 60%;
+    margin: 10% auto;
+    z-index: 0;
+}
+
+form {
+    display: flex;
+    height: 5rem;
+}
+
+input {
+    width: 20% !important;
+    text-align: center;
+    opacity: 0.95;
+
+}
+
+.row {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    top: 12.5%;    
+}
+
+#submit-button {
+    color: black;
+    width: 30%;
+    font-weight: bold;
+    display: flex-end;
+    position: absolute;
+    left: 37.5%;
+    margin-top: 85px;
+}

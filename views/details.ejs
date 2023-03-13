@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/styles/allstyles.css">
+    <link rel="stylesheet" href="/styles/detailstyles/details-table.css">
+    <link rel="stylesheet" href="/styles/detailstyles/modal-styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <title>Details</title>
+</head>
+
+    <!--A fixed navigation bar with icons and links-->
+    <nav class="z-depth-5" name="navigation-bar">
+        <h1 class="nav-links" id="homepage"><a class="nav-href" id="homepage-link" href="/">Home</a>
+            <img class="nav-icons" id="homepage-icon" src="/images/welcomeIcon.png">
+        </h1>
+        <h1 class="nav-links" id="inventory"><a class="nav-href" id="inventory-link" href="/inventory">Inventory</a>
+            <img class="nav-icons" id="inventory-icon" src="/images/inventoryIcon.png">
+        </h1>
+        <h1 class="nav-links" id="details"><a class="nav-href" id="details-link" href="/inventory/details">Details</a>
+            <img class="nav-icons" id="details-icon" src="/images/detailsIcon.png">
+        </h1>
+    </nav>
+
+    <!--Full inventory table with edit and delete buttons-->
+    <div id="full-inventory-table">
+        <div class="table z-depth-5" id="inventory-table">
+            <table class="highlight responsive-table">
+                <thead>
+                    <tr>
+                        <th id="class-name">Class:</th>
+                        <th id="assignment-name">Assignment Name:</th>
+                        <th id="due-date">Due Date:</th>
+                        <th id="priority">Priority (1-10):</th>
+                        <th id="assignment-type">Type:</th>
+                        <th id="assignment-format">Format:</th>
+                        <th id="interest-level">Interest Level (1-10):</th>
+                        <th id="relevance-level">Relevance Level (1-10):</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><%=class_name%></td>
+                    <td><%=assignment_name%></td>
+                    <td><%=due_date%></td>
+                    <td><%=priority_rating%></td>
+                    <td><%=assignment_type%></td>
+                    <td><%=assignment_format%></td>
+                    <td><%=interest_level%></td>
+                    <td><%=relevance_level%></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="table z-depth-5" id="inventory-table">
+            <table class="highlight responsive-table">
+                <thead>
+                    <tr>
+                        <th id="description">Description:</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><%=description%></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!--Modal trigger-->
+    <div id="other-buttons">
+        <a class="modal-trigger btn waves-effect waves-light blue darken-3 z-depth-2" href="#modal-editinfo" id="moreedit-button">More/Edit</a>
+        <a class="btn waves-effect waves-light blue darken-3 z-depth-2" href="/inventory/details/<%=item_id%>/delete" id="delete">Delete</a>
+    </div>
+
+    <!--Modal content-->
+    <div id="modal-editinfo" class="modal">
+        <div class="modal-content">
+            <form method="post" action="/inventory/details/<%=item_id%>">
+                <table class="modal-table responsive-table" style="width: 100%;">
+                    <tr>
+                        <td>
+                            <div class="input-field">
+                                <input id="class-name-input" name="class_name_input" type="text" value="<%=class_name%>" required>
+                                <label for="class-name-input">Class Name</label>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="input-field">
+                                <input id="assignment-name-input" name="assignment_name_input" type="text" value="<%=assignment_name%>" required>
+                                <label for="assignment-name-input">Assignment Name</label>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="input-field">
+                                <input id="due-date-input" name="due_date_input" type="text" value="<%=due_date%>" required>
+                                <label for="due-date-input">Due Date</label>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="input-field">
+                                <input id="priority-rating-input" name="priority_rating_input" type="range" value="<%=priority_rating%>" min="1" max="10" step="1" style="margin-top: 50px" required>
+                                <label for="priority-rating-input">Priority</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <table style="margin: 0; width: 100%;">
+                            <td>
+                                <div class="input-field">
+                                    <input id="assignment-type-input" name="assignment_type_input" type="text" value="<%=assignment_type%>">
+                                    <label for="assignment-type-input">Assignment Type</label>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="input-field">
+                                    <input id="assignment-format-input" name="assignment_format_input" type="text" value="<%=assignment_format%>">
+                                    <label for="assignment-format-input">Assignment Format</label>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="input-field">
+                                    <input id="interest-level-input" name="interest_level_input" type="range" value="<%=interest_level%>" min="1" max="10" step="1" style="margin-top: 50px">
+                                    <label for="interest-level-input">Interest Level</label>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="input-field">
+                                    <input id="relevance-level-input" name="relevance_level_input" type="range" value="<%=relevance_level%>" min="1" max="10" step="1" style="margin-top: 50px">
+                                    <label for="relevance-level-input">Relevance Level</label>
+                                </div>
+                            </td>
+                        </table>
+                    </tr>
+
+                <!--Another table because the td element doesn't extend to the 100% width of the outer table-->
+                <table style="margin: 0; width: 100%;">
+                    <tr>
+                        <td>
+                            <div class="input-field">
+                                <input id="description-input" name="description_input" type="text" value="<%=description%>">
+                                <label for="description-input">Description</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                    <div class="footer-modal">
+                        <button class="save-exit-modal blue lighten-1 waves-effect waves-blue btn-flat" type="submit">Submit</button>
+                        <button href="#!" class="modal-close exit-modal blue lighten-1 waves-effect waves-blue btn-flat">Exit</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <!-- initialize Materialize elements -->
+    <script>M.AutoInit();</script>
+</html>

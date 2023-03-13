@@ -1,0 +1,113 @@
+:root {
+    --main-background-color: #424c80;
+    --nav-background-color: #5B84B1FF;
+    --nav-link-color: #ffd284;
+    --table-white-color: #eeeeee;
+    --modal-color: #375f8f;
+   }
+   
+   * {
+       /*Just to see the positioning of elements, will be removed*/
+       box-sizing: border-box;
+       font-family: Verdana, Tahoma, sans-serif;
+   }
+   
+   html {
+       width: 100%;
+       height: 100%;
+       background-color: var(--main-background-color);
+       display: block;
+       z-index: 0;
+   }
+   
+   div {
+    width: 100%;
+   }
+   
+   nav {
+       display: flex;
+       left: 15%;
+       top: 0;
+       position: fixed;
+       height: 100px;
+       width: 70% !important;
+       background-color: var(--nav-background-color);
+       border-radius: 10px;
+       justify-content: center;
+       z-index: 10;
+   }
+   
+   .nav-links{
+       margin: 20px auto;
+       font-size: 40px;
+       font-family: Tahoma;
+       font-weight: bold;
+       text-align: center;
+   }
+
+   .nav-href {
+       display: block;
+       margin-bottom: -10px;
+   }
+
+   .nav-icons {
+       height: 25px;
+   }
+   
+   .nav-href:hover {
+       color: var(--nav-link-color);
+       text-decoration: underline;
+   }
+
+@media (max-width: 412px) {
+    nav {
+        display: flex;
+        left: 12.5%;
+        top: 0;
+        position: fixed;
+        height: 75px;
+        width: 75% !important;
+        background-color: var(--nav-background-color);
+        border-radius: 10px;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    .nav-links {
+        margin: auto;
+        font-size: 20px;
+        font-family: Tahoma;
+        font-weight: bold;
+        z-index: 2;
+    }
+
+    .navigation-icons-bar {
+        left: 15%;
+        margin-top: 50px;
+        width: 70%;
+        height: 20px;
+        z-index: 2;
+        
+    }
+
+    #homepage-icon {
+        left: 7.5% !important;
+    }
+
+    #inventory-icon {
+        left: 36% !important;
+    }
+
+    #details-icon {
+        left: 69% !important;
+    }
+
+    a:active {
+        color: var(--nav-link-color);
+        text-decoration: none;
+    }
+
+    form {
+        border: 1px solid black;
+    }
+}
