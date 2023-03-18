@@ -25,4 +25,14 @@
             <img class="nav-icons" id="details-icon" src="/images/detailsIcon.png">
         </h1>
     </nav>
+
+    <!--Authentication button configuration-->
+    <div class="auth-button-div">
+        <% if (isLoggedIn) { %>
+            <a class="btn waves-effect waves-light blue darken-3 z-depth-2 auth-buttons" id="auth-button-profile">Welcome back <%=user.name%></a>
+            <a href="/logout" class="btn waves-effect waves-light blue darken-3 z-depth-2 auth-buttons" id="auth-button-logout">Logout</a>
+        <% } else { %>
+            <a href="/login" class="btn waves-effect waves-light blue darken-3 z-depth-2 auth-buttons" id="auth-button-login">Login</a>
+        <% } %>
+    </div>
 </html>

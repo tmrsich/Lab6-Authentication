@@ -59,6 +59,19 @@
        text-decoration: underline;
    }
 
+   .auth-button-div {
+       border: 1px solid black;
+       position: relative;
+       margin-top: 150px;
+       width: 20%;
+       left: 40%;
+       text-align: center;
+   }
+
+   /*.auth-button-profile {
+       
+   }*/
+
 @media (max-width: 412px) {
     nav {
         display: flex;
