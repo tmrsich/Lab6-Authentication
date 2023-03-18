@@ -5,6 +5,20 @@ const helmet = require("helmet");
 const app = express();
 const port = process.env.PORT || 8080;
 const db = require('./db/db_pool');
+const { auth } = require('express-openid-connect');
+
+// Auth0 Configuration 
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: 'a long, randomly-generated string stored in env',
+  baseURL: 'http://localhost:8080',
+  clientID: 'uNpVSchzfcDwjSjQy9qUGFxMck32PD3p',
+  issuerBaseURL: 'https://dev-z8osrxjm1hjtardv.us.auth0.com'
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
 
 //Configure Express to use certain HTTP headers for security
 //Explicitly set the CSP to allow specific sources
@@ -31,6 +45,11 @@ app.use(express.static(__dirname + '/public'));
 
 // configures Express to parse URL-encoded POST request bodies (traditional forms)
 app.use( express.urlencoded({ extended: false }) );
+
+// req.isAuthenticated is provided from the auth router
+app.get('/authtest', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
 
 // define a route for the default home page
 app.get( "/", (req, res) => {

@@ -32,7 +32,7 @@ th, td {
 }
 
 .infoedit-button + .infoedit-button, .delete-button + .delete-button {
-    margin-top: 47.5px;
+    margin-top: 100px;
 }
 
 .delete-button {
