@@ -1,21 +1,25 @@
 //set up the server
 const express = require("express");
 const logger = require("morgan");
+const { auth } = require('express-openid-connect');
+const { requiresAuth } = require('express-openid-connect');
+const dotenv = require('dotenv');
+dotenv.config();
+
 const helmet = require("helmet");
+const db = require('./db/db_pool');
 const app = express();
 const port = process.env.PORT || 8080;
-const db = require('./db/db_pool');
-const { auth } = require('express-openid-connect');
 
 // Auth0 Configuration 
 const config = {
-  authRequired: false,
-  auth0Logout: true,
-  secret: 'a long, randomly-generated string stored in env',
-  baseURL: 'http://localhost:8080',
-  clientID: 'uNpVSchzfcDwjSjQy9qUGFxMck32PD3p',
-  issuerBaseURL: 'https://dev-z8osrxjm1hjtardv.us.auth0.com'
-};
+    authRequired: false,
+    auth0Logout: true,
+    secret: process.env.AUTH0_SECRET,
+    baseURL: process.env.AUTH0_BASE_URL,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
+  };
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
@@ -46,10 +50,22 @@ app.use(express.static(__dirname + '/public'));
 // configures Express to parse URL-encoded POST request bodies (traditional forms)
 app.use( express.urlencoded({ extended: false }) );
 
+// define middleware that appends useful auth-related information to the res object
+// so EJS can easily access it
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.oidc.isAuthenticated();
+    res.locals.user = req.oidc.user;
+    next();
+})
+
 // req.isAuthenticated is provided from the auth router
 app.get('/authtest', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
+
+app.get('/profile', requiresAuth(), (req, res) => {
+    res.send(JSON.stringify(req.oidc.user));
+  });
 
 // define a route for the default home page
 app.get( "/", (req, res) => {
