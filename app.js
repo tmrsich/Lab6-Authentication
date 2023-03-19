@@ -111,7 +111,7 @@ const read_assignment_sql = `
 `
 // define a route for the item detail page
 app.get( "/inventory/details/:item_id", requiresAuth(), (req, res) => {
-    db.execute(read_assignment_sql, [req.params.item_id], [req.oidc.user.email], (error, results) => {
+    db.execute(read_assignment_sql, [req.params.item_id, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else if (results.length == 0)
@@ -123,29 +123,22 @@ app.get( "/inventory/details/:item_id", requiresAuth(), (req, res) => {
     });
 });
 
-// query to create entries on the inventory page using the form
-const create_inventory_sql = `
-    INSERT INTO Item
-        (class_name, assignment_name, due_date, priority_rating, user)
-    VALUES
-        (?, ?, ?, ?, ?)
+// query to delete an entry on the inventory page in the table
+const delete_inventory_sql = `
+    DELETE
+    FROM
+        Item
+    WHERE
+        item_id = ? AND user = ?
 `
 
-// defines a POST request to create entries in the database
-app.post("/inventory", (req, res) => {
-    db.execute(create_inventory_sql, 
-        [
-            req.body.class_name,
-            req.body.assignment_name,
-            req.body.due_date, 
-            req.body.priority_rating,
-            req.oidc.user.email
-        ], (error, results) => {
+// defines a route to delete an entry
+app.get("/inventory/details/:item_id/delete", requiresAuth(), (req, res) => {
+    db.execute(delete_inventory_sql, [req.params.item_id, req.oidc.user.email], (error, results) => {
         if (error)
-            res.status(500).send(error); //Internal Server Error
+            res.status(500).send(error); // Resorts to an internal server error
         else {
-            //results.insertId has the primary key (id) of the newly inserted element.
-            res.redirect(`/inventory/details/${results.insertId}`);
+            res.redirect("/inventory");
         }
     });
 })
@@ -191,22 +184,29 @@ app.post("/inventory/details/:item_id", requiresAuth(), (req, res) => {
     });
 })
 
-// query to delete an entry on the inventory page in the table
-const delete_inventory_sql = `
-    DELETE
-    FROM
-        Item
-    WHERE
-        item_id = ? AND user = ?
+// query to create entries on the inventory page using the form
+const create_inventory_sql = `
+    INSERT INTO Item
+        (class_name, assignment_name, due_date, priority_rating, user)
+    VALUES
+        (?, ?, ?, ?, ?)
 `
 
-// defines a route to delete an entry
-app.get("/inventory/details/:item_id/delete", requiresAuth(), (req, res) => {
-    db.execute(delete_inventory_sql, [req.params.item_id, req.oidc.user.email], (error, results) => {
+// defines a POST request to create entries in the database
+app.post("/inventory", requiresAuth(), (req, res) => {
+    db.execute(create_inventory_sql, 
+        [
+            req.body.class_name,
+            req.body.assignment_name,
+            req.body.due_date, 
+            req.body.priority_rating,
+            req.oidc.user.email
+        ], (error, results) => {
         if (error)
-            res.status(500).send(error); // Resorts to an internal server error
+            res.status(500).send(error); //Internal Server Error
         else {
-            res.redirect("/inventory");
+            //results.insertId has the primary key (id) of the newly inserted element.
+            res.redirect(`/inventory/details/${results.insertId}`);
         }
     });
 })
