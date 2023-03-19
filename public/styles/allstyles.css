@@ -60,17 +60,29 @@
    }
 
    .auth-button-div {
-       border: 1px solid black;
+       display: flex;
        position: relative;
        margin-top: 150px;
-       width: 20%;
-       left: 40%;
-       text-align: center;
+       width: 80%;
+       left: 10%;
+       height: 100px;
    }
 
-   /*.auth-button-profile {
-       
-   }*/
+   #auth-button-profile, #auth-button-logout {
+       height: 100px;
+       margin: 0 auto;
+       line-height: 100px;
+   }
+
+   #auth-button-profile {
+       font-size: 24px;
+       width: 40%;
+   }
+
+   #auth-button-logout {
+       font-size: 48px;
+       width: 25%;
+   }
 
 @media (max-width: 412px) {
     nav {
