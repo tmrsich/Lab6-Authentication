@@ -12,6 +12,10 @@
     border-radius: 20px;
 }
 
+.modal-slider-input {
+    margin-top: -30px
+}
+
 .footer-modal   {
     background-color: var(--modal-color);
     width: 100%;
