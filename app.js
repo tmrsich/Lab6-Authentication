@@ -72,7 +72,7 @@ app.get( "/", (req, res) => {
     res.render("homepage");
 } );
 
-// query to read the database information
+// defines a query to read all the database information
 const read_inventory_sql = `
     SELECT
         item_id,
@@ -86,36 +86,35 @@ const read_inventory_sql = `
 `
 
 // define a route for the inventory page
-app.get( "/inventory", requiresAuth(), (req, res) => {
+app.get("/inventory", requiresAuth(), (req, res) => {
     db.execute(read_inventory_sql, [req.oidc.user.email], (error, results) => {
         if (error) {
             res.status(500).send(error); // Internal Server Error
         } else {
-            res.render('inventory', {inventory : results })
+            res.render('inventory', {inventory : results})
         }
     });
 } );
 
-// define a route for the item detail page
+// define a query for the item detail page
 const read_assignment_sql = `
     SELECT
-    item_id,
-    class_name, assignment_name, assignment_type, assignment_format,
-    due_date, priority_rating, interest_level, relevance_level,
-    description
-
+        item_id,
+        class_name, assignment_name, assignment_type, assignment_format,
+        due_date, priority_rating, interest_level, relevance_level,
+        description
     FROM
         Item
     WHERE
         item_id = ? AND user = ?
 `
 // define a route for the item detail page
-app.get( "/inventory/details/:item_id", requiresAuth(), (req, res) => {
+app.get("/inventory/details/:item_id", requiresAuth(), (req, res) => {
     db.execute(read_assignment_sql, [req.params.item_id, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else if (results.length == 0)
-            res.status(404).send(`No item found with id = "${req.params.item_id}"` ); // NOT FOUND
+            res.status(404).send(`No item found with id = "${req.params.item_id}"`); //Not found
         else {
             let data = results[0]; // results is still an array
             res.render('details', data);
@@ -123,7 +122,28 @@ app.get( "/inventory/details/:item_id", requiresAuth(), (req, res) => {
     });
 });
 
-// query to delete an entry on the inventory page in the table
+// defines a query for the item detail-list page
+const read_list_sql = `
+    SELECT
+        item_id, assignment_name, class_name
+    FROM
+        Item
+    WHERE
+        user = ?
+`
+
+// define a route for the list page
+app.get("/inventory/list", requiresAuth(), (req, res) => {
+    db.execute(read_list_sql, [req.oidc.user.email], (error, results) => {
+        if (error) {
+            res.status(500).send(error); // Internal Server Error
+        } else {
+            res.render('list', {list : results})
+        }
+    });
+} );
+
+// defines a query to delete an entry on the inventory page in the table
 const delete_inventory_sql = `
     DELETE
     FROM
@@ -143,7 +163,7 @@ app.get("/inventory/details/:item_id/delete", requiresAuth(), (req, res) => {
     });
 })
 
-// query to update entries on both the inventory and details page
+// defines a query to update entries on both the inventory and details page
 const update_inventory_sql = `
     UPDATE
         Item
