@@ -68,10 +68,15 @@
        height: 100px;
    }
 
-   #auth-button-profile, #auth-button-logout {
+   #auth-button-profile, #auth-button-login, #auth-button-logout {
        height: 100px;
        margin: 0 auto;
        line-height: 100px;
+   }
+
+   #auth-button-login {
+       font-size: 48px;
+       width: 50%;
    }
 
    #auth-button-profile {
