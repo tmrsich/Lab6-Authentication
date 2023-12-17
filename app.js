@@ -1,4 +1,4 @@
-//set up the server
+// Sets up the server
 const express = require("express");
 const logger = require("morgan");
 const { auth } = require('express-openid-connect');
