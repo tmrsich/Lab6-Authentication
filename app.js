@@ -50,8 +50,7 @@ app.use(express.static(__dirname + '/public'));
 // configures Express to parse URL-encoded POST request bodies (traditional forms)
 app.use( express.urlencoded({ extended: false }) );
 
-// define middleware that appends useful auth-related information to the res object
-// so EJS can easily access it
+// Defines middleware that appends useful auth-related information to the res object so EJS can easily access it
 app.use((req, res, next) => {
     res.locals.isLoggedIn = req.oidc.isAuthenticated();
     res.locals.user = req.oidc.user;
