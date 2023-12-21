@@ -44,8 +44,7 @@ db.execute(read_itemtable_sql,
         if (error)
             throw error;
 
-        console.log("Table 'Item' initialized with:")
-        console.log(results);
+        console.log("Table 'Item' initialized with:" + results);
     }
 );
 db.end();
