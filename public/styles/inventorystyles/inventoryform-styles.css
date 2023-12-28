@@ -22,6 +22,10 @@ form {
     top: 12.5%;    
 }
 
+.row::after {
+    content: none;
+}
+
 input {
     width: 20% !important;
     text-align: center;
@@ -29,11 +33,12 @@ input {
 }
 
 #submit-button {
-    color: black;
-    width: 30%;
-    font-weight: bold;
-    display: flex-end;
     position: absolute;
-    left: 37.5%;
+    display: flex;
     margin-top: 85px;
+    justify-content: center;
+    color: black;
+    font-weight: bold;
+    left: 50%;
+    transform: translateX(-50%);
 }
