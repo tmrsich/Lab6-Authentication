@@ -6,88 +6,80 @@
     --modal-color: #375f8f;
    }
    
-   * {
-       /*Just to see the positioning of elements, will be removed*/
-       box-sizing: border-box;
-       font-family: Verdana, Tahoma, sans-serif;
-   }
-   
-   html {
-       width: 100%;
-       height: 100%;
-       background-color: var(--main-background-color);
-       display: block;
-       z-index: 0;
-   }
-   
-   div {
+* {
+    box-sizing: border-box;
+    font-family: Verdana, Tahoma, sans-serif;
+}
+
+html {
     width: 100%;
-   }
-   
-   nav {
-       display: flex;
-       left: 15%;
-       top: 0;
-       position: fixed;
-       height: 100px;
-       width: 70% !important;
-       background-color: var(--nav-background-color);
-       border-radius: 10px;
-       justify-content: center;
-       z-index: 10;
-   }
-   
-   .nav-links{
-       margin: 20px auto;
-       font-size: 40px;
-       font-family: Tahoma;
-       font-weight: bold;
-       text-align: center;
-   }
+    height: 100%;
+    background-color: var(--main-background-color);
+    display: block;
+    z-index: 0;
+}
 
-   .nav-href {
-       display: block;
-       margin-bottom: -10px;
-   }
+div {
+ width: 100%;
+}
 
-   .nav-icons {
-       height: 25px;
-   }
-   
-   .nav-href:hover {
-       color: var(--nav-link-color);
-       text-decoration: underline;
-   }
+nav {
+    display: flex;
+    left: 15%;
+    top: 0;
+    position: fixed;
+    height: 100px;
+    width: 70% !important;
+    background-color: var(--nav-background-color);
+    border-radius: 10px;
+    justify-content: center;
+    z-index: 10;
+}
 
-   .auth-button-div {
-       display: flex;
-       position: relative;
-       margin-top: 150px;
-       width: 80%;
-       left: 10%;
-       height: 100px;
-   }
+.nav-links{
+    margin: 20px auto;
+    font-size: 40px;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+}
+.nav-href {
+    display: block;
+    margin-bottom: -10px;
+}
+.nav-icons {
+    height: 25px;
+}
 
-   #auth-button-profile, #auth-button-login, #auth-button-logout {
-       height: 100px;
-       margin: 0 auto;
-       line-height: 100px;
-   }
-
-   #auth-button-login {
-       font-size: 48px;
-       width: 50%;
-   }
-
-   #auth-button-profile {
-       font-size: 24px;
-       width: 40%;
-   }
-
-   #auth-button-logout {
-       font-size: 48px;
-       width: 25%;
-   }
+.nav-href:hover {
+    color: var(--nav-link-color);
+    text-decoration: underline;
+}
+.auth-button-div {
+    display: flex;
+    position: relative;
+    margin-top: 150px;
+    width: 80%;
+    left: 10%;
+    height: 100px;
+}
+#auth-button-profile, #auth-button-login, #auth-button-logout {
+    height: 100px;
+    margin: 0 auto;
+    line-height: 100px;
+}
+#auth-button-login {
+    font-size: 48px;
+    width: 50%;
+}
+#auth-button-profile {
+    font-size: 24px;
+    width: 40%;
+}
+#auth-button-logout {
+    font-size: 48px;
+    width: 25%;
+}
 
 @media (max-width: 412px) {
     nav {
